@@ -160,19 +160,12 @@ class ArvoreBinaria {
     
 
     //Questão 1 "tp6"
-    private static int cont1 = 0;
 
     private int privateContarNos(No elemento) {
-
-        if (vazia()) {
+        if (elemento == null) {
             return 0;
         }
-        if(elemento != null) {
-            cont1++;
-            privateContarNos(elemento.esquerda);
-            privateContarNos(elemento.direita);
-        }
-        return cont1;
+        return 1 + privateContarNos(elemento.esquerda) + privateContarNos(elemento.direita);
     }
 
     public int contarNos() {
@@ -180,21 +173,16 @@ class ArvoreBinaria {
     }
 
     //Questão 2 "tp6"
-    private static int cont2 = 0;
-
     private int privateContarNosNaoFolha(No elemento) {
 
-        if (vazia()) {
+        if (elemento ==  null) {
             return 0;
         }
-        if(elemento != null) {
-            if (elemento.esquerda != null || elemento.direita != null) {
-                cont2++;
-            }
-            privateContarNosNaoFolha(elemento.esquerda);
-            privateContarNosNaoFolha(elemento.direita);
+        if (elemento.esquerda != null || elemento.direita != null) {
+            return 1 + privateContarNosNaoFolha(elemento.esquerda) + privateContarNosNaoFolha(elemento.direita);
+        } else {
+            return privateContarNosNaoFolha(elemento.esquerda) + privateContarNosNaoFolha(elemento.direita);
         }
-        return cont2;
     }
 
     public int contarNosNaoFolha() {
@@ -202,21 +190,16 @@ class ArvoreBinaria {
     }
 
     //Questão 3 "tp6"
-    private static int cont3 = 0;
-
     private int privateContarNosFolha(No elemento) {
 
-        if (vazia()) {
+        if (elemento == null) {
             return 0;
         }
-        if(elemento != null) {
-            if (elemento.esquerda == null && elemento.direita == null) {
-                cont3++;
-            }
-            privateContarNosFolha(elemento.esquerda);
-            privateContarNosFolha(elemento.direita);
+        if (elemento.esquerda == null && elemento.direita == null) {
+            return 1;
+        } else {
+            return privateContarNosFolha(elemento.esquerda) + privateContarNosFolha(elemento.direita);
         }
-        return cont3;
     }
 
     public int contarNosFolha() {
@@ -240,6 +223,7 @@ class ArvoreBinaria {
         return Math.max(alturaEsquerda , alturaDireita ) + 1;
     }
 
+    //Qeustão 5 "tp6"
     public void removerPares() {
         privateRemoverPares(raiz);
     }
